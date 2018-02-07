@@ -27,6 +27,10 @@ final class MoveAction extends AbstractAction
             $to = $this->helper->ask($input, $output, $choiceTo);
         }
 
-        $board->moveFigure($board->cell($from), $board->cell($to));
+        try {
+            $board->moveFigure($board->cell($from), $board->cell($to));
+        } catch (\Exception $error) {
+            $output->writeln('ERROR: ' . $error->getMessage());
+        }
     }
 }

@@ -14,6 +14,10 @@ final class SaveAction extends AbstractAction
 {
     public function action(InputInterface $input, OutputInterface $output, BoardInterface $board)
     {
-        $board->save();
+        try {
+            $board->save();
+        } catch (\Exception $error) {
+            $output->writeln('ERROR: ' . $error->getMessage());
+        }
     }
 }

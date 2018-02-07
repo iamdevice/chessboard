@@ -27,6 +27,10 @@ final class PutAction extends AbstractAction
             $cell = $this->helper->ask($input, $output, $choiceCell);
         }
 
-        $board->cell($cell)->putFigure($figure);
+        try {
+            $board->cell($cell)->putFigure($figure);
+        } catch (\Exception $error) {
+            $output->writeln('ERROR: ' . $error->getMessage());
+        }
     }
 }

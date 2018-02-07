@@ -14,7 +14,11 @@ final class LoadAction extends AbstractAction
 {
     public function action(InputInterface $input, OutputInterface $output, BoardInterface $board)
     {
-        $board->clear();
-        $board->load();
+        try {
+            $board->clear();
+            $board->load();
+        } catch (\Exception $error) {
+            $output->writeln('ERROR: ' . $error->getMessage());
+        }
     }
 }
