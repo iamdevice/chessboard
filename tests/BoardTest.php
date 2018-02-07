@@ -38,6 +38,16 @@ class BoardTest extends TestCase
         $this->assertNull($this->board->cell(1, 'C')->getFigure());
     }
 
+    public function testPutFigureWithUserFunction()
+    {
+        $pawn = Figure::PAWN();
+        $this->board->cell(1, 'B')->putFigure($pawn, function () use ($pawn) {
+            echo $pawn->getName() . ' was put on board';
+        });
+
+        $this->expectOutputString($pawn->getName() . ' was put on board');
+    }
+
     public function testMoveFigure()
     {
         $pawn = Figure::PAWN();

@@ -28,8 +28,8 @@ class StorageTest extends TestCase
         $pawn = Figure::PAWN();
         $bishop = Figure::BISHOP();
 
-        $board->putFigureOnCell($board->cell(1, 'B'), $pawn);
-        $board->putFigureOnCell($board->cell(1, 'C'), $bishop);
+        $board->cell(1, 'B')->putFigure($pawn);
+        $board->cell(1, 'C')->putFigure($bishop);
 
         $board->save();
         $board->clear();

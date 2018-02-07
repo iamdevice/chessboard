@@ -44,11 +44,6 @@ class Board implements BoardInterface
         return $this->board[$row][$col];
     }
 
-    public function putFigureOnCell(CellInterface $cell, FigureInterface $figure): void
-    {
-        $cell->putFigure($figure);
-    }
-
     public function moveFigure(CellInterface $from, CellInterface $to): void
     {
         if (!is_null($to->getFigure())) {
