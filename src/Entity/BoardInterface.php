@@ -10,10 +10,9 @@ use ChessBoard\Storage\StorageInterface;
 
 interface BoardInterface
 {
-    public function __construct(int $size);
     public function setStorage(StorageInterface $storage);
     public function getBoard();
-    public function cell(int $col, int $row): CellInterface;
+    public function cell(int $col, string $row): CellInterface;
     public function putFigureOnCell(CellInterface $cell, FigureInterface $figure): void;
     public function moveFigure(CellInterface $from, CellInterface $to): void;
     public function clear();

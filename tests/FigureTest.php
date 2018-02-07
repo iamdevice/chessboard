@@ -6,14 +6,14 @@
 
 namespace ChessBoard\Test;
 
-use ChessBoard\Entity\PawnFigure;
+use ChessBoard\Entity\Figure;
 use PHPUnit\Framework\TestCase;
 
 class FigureTest extends TestCase
 {
     public function testNewPawnFigure()
     {
-        $figure = new PawnFigure();
+        $figure = Figure::PAWN();
 
         $this->assertEquals('pawn', $figure->getName());
     }

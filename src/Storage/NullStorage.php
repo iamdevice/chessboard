@@ -13,8 +13,8 @@ class NullStorage implements StorageInterface
 
     public function save(array $board)
     {
-        for ($row = 0; $row < count($board); $row++) {
-            for ($col = 0; $col < count($board[$row]); $col++) {
+        for ($row = 1; $row <= count($board); $row++) {
+            foreach (range('A', 'H') as $col) {
                 $this->board[$row][$col] = clone $board[$row][$col];
             }
         }

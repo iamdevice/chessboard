@@ -8,7 +8,7 @@ namespace ChessBoard\Test;
 
 use ChessBoard\Entity\Cell;
 use ChessBoard\Entity\CellInterface;
-use ChessBoard\Entity\PawnFigure;
+use ChessBoard\Entity\Figure;
 use PHPUnit\Framework\TestCase;
 
 class CellTest extends TestCase
@@ -23,7 +23,7 @@ class CellTest extends TestCase
 
     public function testPutFigure()
     {
-        $figure = new PawnFigure();
+        $figure = Figure::BISHOP();
         $this->cell->putFigure($figure);
 
         $this->assertEquals($figure, $this->cell->getFigure());

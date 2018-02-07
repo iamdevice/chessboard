@@ -18,8 +18,8 @@ class FileStorage implements StorageInterface
     public function save(array $board)
     {
         $res = fopen($this->file, 'w');
-        for ($row = 0; $row < count($board); $row++) {
-            for ($col = 0; $col < count($board[$row]); $col++) {
+        for ($row = 1; $row < count($board); $row++) {
+            foreach (range('A', 'H') as $col) {
                 fputcsv($res, [$row, $col, serialize($board[$row][$col])]);
             }
         }

@@ -7,7 +7,7 @@
 namespace ChessBoard\Test;
 
 use ChessBoard\Entity\Board;
-use ChessBoard\Entity\PawnFigure;
+use ChessBoard\Entity\Figure;
 use ChessBoard\Storage\FileStorage;
 use ChessBoard\Storage\NullStorage;
 use ChessBoard\Storage\StorageInterface;
@@ -23,19 +23,24 @@ class StorageTest extends TestCase
      */
     public function testStorage(StorageInterface $storage)
     {
-        $board = new Board(10);
+        $board = new Board();
         $board->setStorage($storage);
-        $pawn = new PawnFigure();
-        $board->putFigureOnCell($board->cell(1, 2), $pawn);
-        $this->assertEquals($pawn, $board->cell(1, 2)->getFigure());
+        $pawn = Figure::PAWN();
+        $bishop = Figure::BISHOP();
+
+        $board->putFigureOnCell($board->cell(1, 'B'), $pawn);
+        $board->putFigureOnCell($board->cell(1, 'C'), $bishop);
+
         $board->save();
         $board->clear();
 
-        $this->assertNull($board->cell(1, 2)->getFigure());
+        $this->assertNull($board->cell(1, 'B')->getFigure());
+        $this->assertNull($board->cell(1, 'C')->getFigure());
 
         $board->load();
-        $this->assertEquals($pawn, $board->cell(1, 2)->getFigure());
-        $this->assertNull($board->cell(1,3)->getFigure());
+        $this->assertEquals($pawn, $board->cell(1, 'B')->getFigure());
+        $this->assertEquals($bishop, $board->cell(1, 'C')->getFigure());
+        $this->assertNull($board->cell(1,'D')->getFigure());
     }
 
     public function storageDataProvider()

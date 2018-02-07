@@ -12,16 +12,18 @@ use ChessBoard\Storage\StorageInterface;
 
 class Board implements BoardInterface
 {
+    const BOARD_SIZE = 8;
+
     /** @var CellInterface[] */
     private $board;
     /** @var StorageInterface $storage */
     private $storage;
 
-    public function __construct(int $size)
+    public function __construct()
     {
-        for ($row = 0; $row < $size; $row++) {
-            for ($col = 0; $col < $size; $col++) {
-                $this->board[$row][$col] = new Cell();
+        for ($row = 0; $row < self::BOARD_SIZE; $row++) {
+            foreach (range('A', 'H') as $col) {
+                $this->board[$row+1][$col] = new Cell();
             }
         }
         $this->storage = new NullStorage();
@@ -37,7 +39,7 @@ class Board implements BoardInterface
         return $this->board;
     }
 
-    public function cell(int $row, int $col): CellInterface
+    public function cell(int $row, string $col): CellInterface
     {
         return $this->board[$row][$col];
     }
@@ -64,8 +66,8 @@ class Board implements BoardInterface
 
     public function clear()
     {
-        for ($row = 0; $row < count($this->board); $row++) {
-            for ($col = 0; $col < count($this->board[$row]); $col++) {
+        for ($row = 1; $row < count($this->board); $row++) {
+            foreach (range('A', 'H') as $col) {
                 $this->cell($row, $col)->removeFigure();
             }
         }
