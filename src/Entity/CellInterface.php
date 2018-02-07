@@ -9,6 +9,6 @@ namespace ChessBoard\Entity;
 interface CellInterface
 {
     public function putFigure(FigureInterface $figure);
-    public function getFigure();
+    public function getFigure(): ?FigureInterface;
     public function removeFigure();
 }

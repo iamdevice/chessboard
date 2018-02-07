@@ -8,6 +8,7 @@ namespace ChessBoard\Test;
 
 use ChessBoard\Entity\Board;
 use ChessBoard\Entity\PawnFigure;
+use ChessBoard\Exception\FailedFigureException;
 use PHPUnit\Framework\TestCase;
 
 class BoardTest extends TestCase
@@ -34,6 +35,7 @@ class BoardTest extends TestCase
         $this->board->cell(1, 2)->putFigure($pawn);
 
         $this->assertEquals($pawn, $this->board->cell(1, 2)->getFigure());
+        $this->assertNull($this->board->cell(1, 3)->getFigure());
     }
 
     public function testMoveFigure()
@@ -50,5 +52,31 @@ class BoardTest extends TestCase
 
         $this->assertNull($from->getFigure());
         $this->assertEquals($figure, $to->getFigure());
+    }
+
+    public function testFailedSourceMoveFigure()
+    {
+        $from = $this->board->cell(1, 2);
+        $to = $this->board->cell(3,4);
+
+        $this->assertNull($to->getFigure());
+
+        $this->expectException(FailedFigureException::class);
+        $this->expectExceptionMessage('Not found figure in source cell');
+        $this->board->moveFigure($from, $to);
+    }
+
+    public function testFailedDestinationMoveFigure()
+    {
+        $pawn = new PawnFigure();
+
+        $from = $this->board->cell(1, 2);
+        $from->putFigure($pawn);
+        $to = $this->board->cell(3,4);
+        $to->putFigure($pawn);
+
+        $this->expectException(FailedFigureException::class);
+        $this->expectExceptionMessage('Destination cell is not empty');
+        $this->board->moveFigure($from, $to);
     }
 }

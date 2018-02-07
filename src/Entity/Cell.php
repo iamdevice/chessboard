@@ -18,7 +18,7 @@ class Cell implements CellInterface
         $this->figure = $figure;
     }
 
-    public function getFigure()
+    public function getFigure(): ?FigureInterface
     {
         return $this->figure;
     }
