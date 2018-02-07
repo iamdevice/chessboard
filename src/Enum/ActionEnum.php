@@ -11,6 +11,7 @@ use ChessBoard\Action\LoadAction;
 use ChessBoard\Action\MoveAction;
 use ChessBoard\Action\PrintAction;
 use ChessBoard\Action\PutAction;
+use ChessBoard\Action\RemoveAction;
 use ChessBoard\Action\SaveAction;
 use ChessBoard\Entity\BoardInterface;
 use MyCLabs\Enum\Enum;
@@ -22,6 +23,7 @@ class ActionEnum extends Enum
 {
     const PUT = 'put figure';
     const MOVE = 'move figure';
+    const REMOVE = 'remove figure';
     const SAVE = 'save game';
     const LOAD = 'load last game';
     const PRINT = 'print board';
@@ -29,6 +31,7 @@ class ActionEnum extends Enum
     private $mapAction = [
         self::PUT => PutAction::class,
         self::MOVE => MoveAction::class,
+        self::REMOVE => RemoveAction::class,
         self::SAVE => SaveAction::class,
         self::LOAD => LoadAction::class,
         self::PRINT => PrintAction::class,
