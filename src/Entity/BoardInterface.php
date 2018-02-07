@@ -12,7 +12,7 @@ interface BoardInterface
 {
     public function setStorage(StorageInterface $storage);
     public function getBoard();
-    public function cell(int $col, string $row): CellInterface;
+    public function cell(string $cell): CellInterface;
     public function moveFigure(CellInterface $from, CellInterface $to): void;
     public function clear();
     public function save();

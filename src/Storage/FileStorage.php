@@ -6,13 +6,15 @@
 
 namespace ChessBoard\Storage;
 
+use ChessBoard\Exception\FileNotFoundException;
+
 class FileStorage implements StorageInterface
 {
     private $file;
 
     public function __construct()
     {
-        $this->file = tempnam('/tmp', 'chessboard_');
+        $this->file = __DIR__ . '/../../chessboard.save';
     }
 
     public function save(array $board)
@@ -28,6 +30,10 @@ class FileStorage implements StorageInterface
 
     public function load()
     {
+        if (!file_exists($this->file)) {
+            throw new FileNotFoundException('Not found saved game');
+        }
+
         $res = fopen($this->file, 'r');
         $board = [];
         while ($line = fgetcsv($res)) {

@@ -5,12 +5,12 @@
  */
 
 use Symfony\Component\Console\Application;
-use ChessBoard\Action\GameAction;
+use ChessBoard\Command\GameCommand;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new Application("ChessBoard", "1.0");
 $app->addCommands([
-    new GameAction()
+    new GameCommand()
 ]);
 $app->run();

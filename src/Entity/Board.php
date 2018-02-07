@@ -9,6 +9,7 @@ namespace ChessBoard\Entity;
 use ChessBoard\Exception\FailedFigureException;
 use ChessBoard\Storage\NullStorage;
 use ChessBoard\Storage\StorageInterface;
+use ChessBoard\Validator\CellAddressValidator;
 
 class Board implements BoardInterface
 {
@@ -39,8 +40,13 @@ class Board implements BoardInterface
         return $this->board;
     }
 
-    public function cell(int $row, string $col): CellInterface
+    public function cell(string $cell): CellInterface
     {
+        CellAddressValidator::validate($cell);
+        list($row, $col) = str_split($cell);
+        if ((int)$row === 0) {
+            list ($col, $row) = str_split($cell);
+        }
         return $this->board[$row][$col];
     }
 
@@ -63,7 +69,7 @@ class Board implements BoardInterface
     {
         for ($row = 1; $row < count($this->board); $row++) {
             foreach (range('A', 'H') as $col) {
-                $this->cell($row, $col)->removeFigure();
+                $this->cell("{$col}{$row}")->removeFigure();
             }
         }
     }

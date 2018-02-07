@@ -28,19 +28,19 @@ class StorageTest extends TestCase
         $pawn = Figure::PAWN();
         $bishop = Figure::BISHOP();
 
-        $board->cell(1, 'B')->putFigure($pawn);
-        $board->cell(1, 'C')->putFigure($bishop);
+        $board->cell('B1')->putFigure($pawn);
+        $board->cell('C1')->putFigure($bishop);
 
         $board->save();
         $board->clear();
 
-        $this->assertNull($board->cell(1, 'B')->getFigure());
-        $this->assertNull($board->cell(1, 'C')->getFigure());
+        $this->assertNull($board->cell('B1')->getFigure());
+        $this->assertNull($board->cell('C1')->getFigure());
 
         $board->load();
-        $this->assertEquals($pawn, $board->cell(1, 'B')->getFigure());
-        $this->assertEquals($bishop, $board->cell(1, 'C')->getFigure());
-        $this->assertNull($board->cell(1,'D')->getFigure());
+        $this->assertEquals($pawn, $board->cell('B1')->getFigure());
+        $this->assertEquals($bishop, $board->cell('C1')->getFigure());
+        $this->assertNull($board->cell('D1')->getFigure());
     }
 
     public function storageDataProvider()
