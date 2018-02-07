@@ -1,0 +1,53 @@
+@startuml
+
+interface FigureInterface {
+    +getName()
+}
+FigureInterface <|-- Figure
+
+interface CellInterface {
+    +putFigure(FigureInterface $figure)
+    +getFigure()
+    +removeFigure()
+}
+CellInterface <|-- Cell
+CellInterface -* FigureInterface
+
+interface BoardInterface {
+    +__constructor(int $size)
+    +getBoard()
+    +cell(int $col, int $row)
+    +putFigureOnCell(CellInterface $cell, FigureInterface $figure)
+    +moveFigure(CellInterface $from, CellInterface $to)
+    +save()
+    +load()
+    +clear()
+}
+BoardInterface <|-- Board
+BoardInterface -* CellInterface
+
+class Figure {
+    -name: string
+    +getName()
+}
+
+class Cell {
+    -figure: FigureInterface
+    +putFigure(FigureInterface $figure)
+    +getFigure()
+    +removeFigure()
+}
+
+class Board {
+    -board: CellInterface[][]
+    +__constructor(int $size)
+    +getBoard()
+    +cell(int $col, int $row)
+    +putFigureOnCell(CellInterface $cell, FigureInterface $figure)
+    +moveFigure(CellInterface $from, CellInterface $to)
+    +save()
+    +load()
+    +clear()
+}
+
+@enduml
