@@ -33,6 +33,7 @@ class GameCommand extends Command
         $helper = $this->getHelper('question');
 
         while (true) {
+            $output->writeln('Press Ctrl+C to exit...');
             $actionQuestion = new ChoiceQuestion(
                 'Choice an action [PUT]',
                 ActionEnum::toArray(),
