@@ -22,6 +22,10 @@
       "ChessBoard\\Test\\": "tests/"
     }
   },
+  "scripts": {
+    "cs-check": "phpcs -p --standard=PSR2 --colors src",
+    "test": "phpunit --colors=auto"
+  },
   "authors": [
     {
       "name": "Aleksandr Kozhevnikov",
